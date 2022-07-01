@@ -1,0 +1,33 @@
+# Javascript Coding Quiz
+This project involves creating a Javascript quiz to be taken in the browser.
+There will be a timer that counts down as questions are answered and dynamically
+generated HTML controlled by Javascript.  
+
+Prompt: 
+AS A coding boot camp student
+I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
+SO THAT I can gauge my progress compared to my peers
+
+Project Parameters:
+GIVEN I am taking a code quiz
+WHEN I click the start button
+THEN a timer starts and I am presented with a question
+WHEN I answer a question
+THEN I am presented with another question
+WHEN I answer a question incorrectly
+THEN time is subtracted from the clock
+WHEN all questions are answered or the timer reaches 0
+THEN the game is over
+WHEN the game is over
+THEN I can save my initials and score
+
+Language(s) used:
+Javascript, HTML, CSS
+
+Project URL/Github repository URL:
+
+
+
+
+
+
