@@ -5,7 +5,7 @@ const quizData = [
         a: 'the good part',
         b: 'the header',
         c: 'the bottom of the body',
-        d: 'both B and C',
+        d: 'inside the footer tags',
         correct: 'c'
     }, {
         question: 'How do you grab an HTML element by its ID in Javascript?',
@@ -39,6 +39,7 @@ const quizData = [
 ];
 
 //select html elements in js 
+const quiz = document.getElementById("quiz");
 const answerEls = document.querySelectorAll(".answer");
 const questionEl = document.getElementById("question");
 const a_text = document.getElementById("a_text");
@@ -57,6 +58,31 @@ loadQuiz();
 function loadQuiz() {
     //need to call deselectAnswers() up here so it knows to do that when the quiz is loaded initially 
     deselectAnswers();
+
+    //timer function to start at the beginning of the quiz 
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        setInterval(function () {
+            minutes = parseInt(timer / 60, 10)
+            seconds = parseInt(timer % 60, 10);
+    
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+    
+            display.textContent = minutes + ":" + seconds;
+    
+            if (--timer < 0) {
+                timer = 0;
+                quiz.innerHTML = `<h2>Time expired! You Answered ${score}/${quizData.length} questions correctly.<h2><button onClick="location.reload()">Play Again?</button>`    
+            }
+        }, 1000);
+    }
+    
+    window.onload = function () {
+        var time = 60 / 2, // your time in seconds here
+            display = document.querySelector('#safeTimerDisplay');
+        startTimer(time, display);
+    };
 
     const currentQuizData = quizData[currentQuiz];
     
@@ -100,9 +126,10 @@ submitBtn.addEventListener("click", () => {
             if(currentQuiz < quizData.length) {
                 loadQuiz();
             } else {
-                //todo: show results 
-                alert("You stumbled across the finish line. Congrats!");
+                quiz.innerHTML = `<h2>You Answered ${score}/${quizData.length} questions correctly.<h2><button onClick="location.reload()">Play Again?</button>`
             }
-
         }
 });
+
+
+
