@@ -1,12 +1,12 @@
 //make an array with all the quiz questions 
 const quizData = [
     {
-        question: 'Inside which HTML element does the JS link belong?',
+        question: "Inside which HTML element does the JS link belong?",
         a: 'the good part',
         b: 'the header',
         c: 'the bottom of the body',
         d: 'both B and C',
-        correct: 'd'
+        correct: 'c'
     }, {
         question: 'How do you grab an HTML element by its ID in Javascript?',
         a: 'document.getElementById',
@@ -37,3 +37,58 @@ const quizData = [
         correct: 'c'
     }
 ];
+
+//select html elements in js 
+const questionEl = document.getElementById("question");
+const a_text = document.getElementById("a_text");
+const b_text = document.getElementById("b_text");
+const c_text = document.getElementById("c_text");
+const d_text = document.getElementById("d_text");
+const submitBtn = document.getElementById("submit");
+
+let currentQuiz = 0; //start on question 1, array item zero
+let answer = undefined;
+let score = 0;
+
+//load quiz function 
+loadQuiz();
+function loadQuiz() {
+    const currentQuizData = quizData[currentQuiz];
+    
+    questionEl.innerText = currentQuizData.question;
+    a_text.innerText = currentQuizData.a;
+    b_text.innerText = currentQuizData.b;
+    c_text.innerText = currentQuizData.c;
+    d_text.innerText = currentQuizData.d;
+}
+
+function getSelected() {
+    const answerEls = document.querySelectorAll(".answer");
+
+    answerEls.forEach((answerEl) => {
+        if(answerEl.checked) {
+            return answerEl.id;
+        }
+    });
+    return undefined;
+}
+
+//when user clicks submit button then the next question is displayed 
+submitBtn.addEventListener("click", () => {
+    //check to see answer 
+    const answer = getSelected();
+    
+        if(answer && answer === quizData[currentQuiz]) {
+            currentQuiz++;
+        }
+
+    
+
+    if(currentQuiz < quizData.length) {
+            loadQuiz();
+        } else {
+            //TODO: show score out of 5
+            alert("You stumbled across the finish line. Well done!");
+        }
+    }
+);
