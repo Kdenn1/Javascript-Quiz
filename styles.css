@@ -21,6 +21,19 @@ body {
     overflow: hidden;
 }
 
+#startMenu {
+    background-color: #fff;
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.quiz-hide {
+    display: none;
+}
+
 .quiz-header {
     padding: 4rem;
 }

@@ -47,11 +47,22 @@ const b_text = document.getElementById("b_text");
 const c_text = document.getElementById("c_text");
 const d_text = document.getElementById("d_text");
 const submitBtn = document.getElementById("submit");
+//grab the start button for the quiz
+const startBtn = document.getElementById("startBtn");
+const startMenu = document.getElementById("startMenu");
 
 
 let currentQuiz = 0; //start on question 1, array item zero
 let answer = undefined;
 let score = 0;
+
+//hide quiz container until start button is clicked 
+startBtn.addEventListener("click", () => {
+    document.getElementById("quiz").style.display = "flex";
+    document.getElementById("startMenu").style.display = "none";
+})
+
+
 
 //load quiz function 
 loadQuiz();
@@ -78,11 +89,12 @@ function loadQuiz() {
         }, 1000);
     }
     
-    window.onload = function () {
+    //fixed this to where the timer only starts if the start button is clicked
+    startBtn.addEventListener("click", () => {
         var time = 60 / 2, // your time in seconds here
             display = document.querySelector('#safeTimerDisplay');
         startTimer(time, display);
-    };
+    });
 
     const currentQuizData = quizData[currentQuiz];
     
