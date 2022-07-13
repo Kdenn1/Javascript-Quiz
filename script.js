@@ -57,7 +57,7 @@ const startBtn = document.getElementById("startBtn");
 const startMenu = document.getElementById("startMenu");
 //declare timer as a variable  
 var timer = 60/2
-
+var display = document.querySelector('#safeTimerDisplay');
 
 let currentQuiz = 0; //start on question 1, array item zero
 let answer = undefined;
