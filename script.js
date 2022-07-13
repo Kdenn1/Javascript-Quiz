@@ -6,35 +6,40 @@ const quizData = [
         b: 'the header',
         c: 'the bottom of the body',
         d: 'inside the footer tags',
-        correct: 'c'
+        correct: 'c',
+        incorrect: ['a','b','d']
     }, {
         question: 'How do you grab an HTML element by its ID in Javascript?',
         a: 'document.getElementById',
         b: 'document.getThatId',
         c: 'get.elementid',
         d: 'document.elementId',
-        correct: 'a'
+        correct: 'a',
+        incorrect: ['b','c','d']
     }, {
         question: 'How would you write a message in an alert box?',
         a: 'alert(message goes here)',
         b: 'alert message[message goes here]',
         c: 'alertbox(message)',
         d: 'alertmsg{message}',
-        correct: 'a'
+        correct: 'a',
+        incorrect: ['b','c','d']
     }, {
         question: 'What is the purpose of a for loop?',
         a: 'Getting fruit loops from the store',
         b: 'repeating a block of code for a known number of times',
         c: 'adding the css properties to the file',
         d: 'storing data',
-        answer: 'b'
+        answer: 'b',
+        incorrect: ['a','c','d']
     }, {
         question: 'How do you create a function in Javascript?',
         a: 'function = myFunction[]',
         b: 'function: function',
         c: 'function = myFunction()',
         d: 'function.start = functionName',
-        correct: 'c'
+        correct: 'c',
+        incorrect: ['a','b','d']
     }
 ];
 
@@ -50,6 +55,8 @@ const submitBtn = document.getElementById("submit");
 //grab the start button for the quiz
 const startBtn = document.getElementById("startBtn");
 const startMenu = document.getElementById("startMenu");
+//end button to submit and see scores 
+
 
 
 let currentQuiz = 0; //start on question 1, array item zero
@@ -84,10 +91,13 @@ function loadQuiz() {
     
             if (--timer < 0) {
                 timer = 0;
-                quiz.innerHTML = `<h2>Time expired! You Answered ${score}/${quizData.length} questions correctly.<h2><button onClick="location.reload()">Play Again?</button>`    
+                quiz.innerHTML = `<h2>You Answered ${score}/${quizData.length} questions correctly.<button onClick="location.reload()">Play Again?</button>
+                </h2>`  
             }
         }, 1000);
     }
+
+    
     
     //fixed this to where the timer only starts if the start button is clicked
     startBtn.addEventListener("click", () => {
@@ -96,7 +106,8 @@ function loadQuiz() {
         startTimer(time, display);
     });
 
-    const currentQuizData = quizData[currentQuiz];
+    
+   const currentQuizData = quizData[currentQuiz];
     
     questionEl.innerText = currentQuizData.question;
     a_text.innerText = currentQuizData.a;
@@ -124,6 +135,10 @@ function deselectAnswers() {
     });
 }
 
+
+//function to make timer subtract 5 seconds 
+
+
 //when user clicks submit button then the next question is displayed 
 submitBtn.addEventListener("click", () => {
     //check to see answer 
@@ -132,16 +147,21 @@ submitBtn.addEventListener("click", () => {
         if(answer) {
             if(answer === quizData[currentQuiz].correct) {
                 score++;
+            } else {
+                timer = seconds -5; 
             }
 
             currentQuiz++;
             if(currentQuiz < quizData.length) {
                 loadQuiz();
             } else {
-                quiz.innerHTML = `<h2>You Answered ${score}/${quizData.length} questions correctly.<h2><button onClick="location.reload()">Play Again?</button>`
+                quiz.innerHTML = `<h2>You Answered ${score}/${quizData.length} questions correctly.<button onClick="location.reload()">Play Again?</button>
+                </h2>`
             }
         }
 });
+
+
 
 
 
