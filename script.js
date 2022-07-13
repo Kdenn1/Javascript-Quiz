@@ -55,8 +55,8 @@ const submitBtn = document.getElementById("submit");
 //grab the start button for the quiz
 const startBtn = document.getElementById("startBtn");
 const startMenu = document.getElementById("startMenu");
-//end button to submit and see scores 
-
+//declare timer as a variable  
+var timer = 60/2
 
 
 let currentQuiz = 0; //start on question 1, array item zero
@@ -79,7 +79,6 @@ function loadQuiz() {
 
     //timer function to start at the beginning of the quiz 
     function startTimer(duration, display) {
-        var timer = duration, minutes, seconds;
         setInterval(function () {
             minutes = parseInt(timer / 60, 10)
             seconds = parseInt(timer % 60, 10);
@@ -96,6 +95,7 @@ function loadQuiz() {
             }
         }, 1000);
     }
+
 
     
     
@@ -134,10 +134,7 @@ function deselectAnswers() {
         answerEl.checked = false;
     });
 }
-
-
-//function to make timer subtract 5 seconds 
-
+ 
 
 //when user clicks submit button then the next question is displayed 
 submitBtn.addEventListener("click", () => {
@@ -148,7 +145,8 @@ submitBtn.addEventListener("click", () => {
             if(answer === quizData[currentQuiz].correct) {
                 score++;
             } else {
-                timer = seconds -5; 
+                timer -= 5;
+                display.textContent = timer; 
             }
 
             currentQuiz++;
